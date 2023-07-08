@@ -26,16 +26,19 @@ SELECT *
 FROM PUBLIC."CovidVaccinations";
 
 -- Data que vamos usar
+-- So pra testar tambem
 SELECT location, date, total_cases, new_cases, total_deaths, population
 FROM PUBLIC."CovidDeaths"
 ORDER BY location, date;
 
 -- Total Cases x Total deaths
+-- Progressão de casos e mortes por local e dia
 SELECT location, date, total_cases, total_deaths, ((total_deaths/total_cases)*100) AS PorcentagemMortes
 FROM PUBLIC."CovidDeaths"
 ORDER BY location, date;
 
 -- Total Cases x Total deaths --> Brasil
+-- Porcentagem de mortes pelo numero de casos
 SELECT location, date, total_cases, total_deaths, ((total_deaths/total_cases)*100) AS PorcentagemMortes
 FROM PUBLIC."CovidDeaths"
 WHERE location = 'Brazil'
@@ -85,7 +88,8 @@ WHERE (location, max_mortes_dia) IN
 (SELECT location, MAX(max_mortes_dia)
  FROM morte_dia
  GROUP BY location
-)
+) 
+
 ORDER BY 3 DESC
 ;
 
